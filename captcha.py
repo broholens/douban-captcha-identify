@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import Api, Resource
 from baidu_identify import recognize_url
 
@@ -11,7 +11,7 @@ class Captcha(Resource):
     def post(self):
         captcha_url = request.form.get('img_url')
         word = recognize_url(captcha_url)
-        return word 
+        return jsonify({'word': word})
 
 api.add_resource(Captcha, '/')
 
